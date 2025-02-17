@@ -3,6 +3,12 @@ let ttype = document.querySelector("#transactionType");
 let date = document.querySelector(".date");
 let addButton = document.querySelector(".addbutton");
 let table = document.querySelector("#table");
+let income = document.querySelector("#income");
+let expense = document.querySelector("#expense");
+let balance = document.querySelector("#balance");
+income.innerText=0;
+expense.innerText=0;
+balance.innerText=0;
 addButton.addEventListener("click",()=>{
     if(amount.value==""){
         return
@@ -20,7 +26,6 @@ addButton.addEventListener("click",()=>{
     let tableTtype = document.createElement("td");
     let tableDate = document.createElement("td");
     let tableAction = document.createElement("td");
-   
 
     tableAmount.innerText=amount.value;
     tableTtype.innerText=ttype.value;
@@ -31,7 +36,13 @@ addButton.addEventListener("click",()=>{
     row.appendChild(tableDate);
     row.appendChild(tableAction);
     table.appendChild(row);
-    // reset() 
+    if(ttype.value == 'Income'){
+        income.innerText = Number(income.innerText) + Number(amount.value);
+    }else if(ttype.value =='Expense'){
+        expense.innerText = Number(expense.innerText) + Number(amount.value);
+    }
+    balance.innerText = Number( income.innerText)-Number(expense.innerText);
+    reset() 
     let Delete = document.querySelectorAll(".deletebuton");
     for (let i=0 ; i<Delete.length ;i++){
         Delete[i].addEventListener("click",()=>{
@@ -48,7 +59,3 @@ function reset() {
     ttype.value="Transaction Type";
     date.value='';
 }
-
-
-
-
